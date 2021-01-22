@@ -1,17 +1,25 @@
-var quiz= document.querySelector("quiz");
-var confirm = document.querySelector("confirm");
-var scoreCard = document.querySelector("scoreCard");
+var quiz= document.querySelector("#quiz");
+var confirm = document.querySelector("#confirm");
+var scoreCard = document.querySelector("#scoreCard");
+var start =document.querySelector("#start")
 
-var startQuizButton = document.querySelector("startButton");
-var restartQuizButton = document.querySelector("restartButton");
+var startQuizButton = document.querySelector("#startButton");
+var restartQuizButton = document.querySelector("#restartButton");
 
-var question = document.querySelector("#question");
+var questionText = document.querySelector("#question");
 var choiceA = document.querySelector("#A");
-var choiceB = document.querySelector("B");
-var choiceC = document.querySelector("C");
-var choiceD = document.querySelector("D");
+var choiceB = document.querySelector("#B");
+var choiceC = document.querySelector("#C");
+var choiceD = document.querySelector("#D");
 
 var recordedRessults = []
+
+var selected;
+var selectA;
+var selectB;
+var selectC;
+var selectD;
+
 
 function runQuiz() {
 
@@ -21,75 +29,31 @@ function runQuiz() {
     var corectAnswers = 0;
     var numberOfQuestion = 0;
     var score;
-
+    var selected;
+    
     var question1;
     question1=
-        (question = "",
-        choiceA = "",
-        choiceB = "",
-        choiceC = "",
-        choiceD = "",
-        choice = corect1,
-        numberOfQuestion= numberOfQuestion.concat(+1))
-            if(question1 === corect1){
-                corectAnswers = corectAnswers.concat(+1);
+        (questionText.textContent = "Who is the first pokemon listed in the pokedex?",
+        choiceA.textContent = "Rhydon",
+        choiceB.textContent = "Bulbasaur",// corect answer
+        choiceC.textContent = "Pikachu",
+        choiceD.textContent = "Slowbro"
+        )
+
+            if(selected = selectB){
+                console.log(selected)
+                numberOfQuestion= ((numberOfQuestion) +1);
+                corectAnswers = ((corectAnswers)+1);
                 console.log("question 1 corect.")
+                console.log(numberOfQuestion)
                 // dispaly corect :) for short set amount of time
-            }else {
+            }else{
+                console.log(selected)
+                numberOfQuestion= ((numberOfQuestion)+1);
                 // display incorect for short set amount of time
                 console.log("question 1 incorect.")
+                console.log(numberOfQuestion)
             }
-
-    var question2;
-    question2=
-        (question = "",
-        choiceA = "",
-        choiceB = "",
-        choiceC = "",
-        choiceD = "",
-        choice = corect2)
-            if(question2 === corect2){
-                corectAnswers = corectAnswers.concat(+1);
-                console.log("question 2 corect.")
-                // dispaly corect :) for short set amount of time
-            }else {
-                // display incorect for short set amount of time
-                console.log("question 2 incorect.")
-            }
-
-    var question3;
-    question3=
-        (question = "",
-        choiceA = "",
-        choiceB = "",
-        choiceC = "",
-        choiceD = "",
-        choice = corect3)
-            if(question3 === corect3){
-                corectAnswers = corectAnswers.concat(1);
-                console.log("question 3 corect.")
-                // dispaly corect :) for set amount of time
-            }else {
-                // display incorect for short set amount of time
-                console.log("question 3 incorect.")
-            }
-
-    var question4;
-    question4=
-        (question = "",
-        choiceA = "",
-        choiceB = "",
-        choiceC = "",
-        choiceD = "",
-        choice = corect4)
-            if(question4 === corect4){
-                corectAnswers = corectAnswers.concat(1);
-                console.log("question 4 corect.");
-                // dispaly corect :) for short set amount of time
-            }else {
-                // display incorect for short set amount of time
-                console.log("question 4 incorect.");
-             }
 
     getScore();
         
@@ -109,4 +73,9 @@ function runQuiz() {
 
 }
 
-generateBtn.addEventListener("click", runQuiz,);
+choiceA.addEventListener("click", selected = selectA);
+choiceB.addEventListener("click", selected = selectB);
+choiceC.addEventListener("click", selected = selectC);
+choiceD.addEventListener("click", selected = selectD);
+
+start.addEventListener("click", runQuiz,);
