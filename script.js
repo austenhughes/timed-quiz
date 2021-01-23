@@ -31,14 +31,19 @@ function runQuiz() {
     var score;
     var selected;
     
-    var question1;
-    question1=
+    var questions;
+    questions=
+        [
+
         (questionText.textContent = "Who is the first pokemon listed in the pokedex?",
         choiceA.textContent = "Rhydon",
         choiceB.textContent = "Bulbasaur",// corect answer
         choiceC.textContent = "Pikachu",
-        choiceD.textContent = "Slowbro"
-        )
+        choiceD.textContent = "Slowbro")
+
+        ]
+
+        for(var i=0; i < arayToStoreQuestions.length; i++)
 
             if(selected = selectB){
                 console.log(selected)
