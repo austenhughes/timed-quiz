@@ -1,4 +1,5 @@
 var start =document.querySelector("#start");
+var reStart =document.querySelector("#reStart");
 var timer =document.querySelector("#timer");
 var questions =document.querySelector("#questions");
 var answers = document.querySelector(".answers");
@@ -7,6 +8,7 @@ var quiz =document.querySelector("#quiz");
 var scorelist=document.querySelector("scoreList");
 
 var score = 0;
+var curentScore=0;
 
 var araytoStoreScores=[];
 var arayToStoreQuestions=
@@ -74,9 +76,6 @@ var curentQuestion = 0
 function askquestion(){
 
     clearQuestion();
-    function clearQuestion(){
-
-    }
 
     var question = arayToStoreQuestions[curentQuestion].question;
     var chosen = arayToStoreQuestions[curentQuestion].choices;
@@ -97,6 +96,11 @@ function askquestion(){
     
     }
 
+}
+
+clearQuestion();
+function clearQuestion(){
+    answers.innerHTML="";
 }
 
 
@@ -135,29 +139,36 @@ function clickFunction(){
         console.log(this.textContent);
         console.log(score);
         secondsLeft = 0;
-        enterScore ();
+        getScore();
     }
 }
 
 function enterScore(){
 
+    clearQuestion();
+
     getScore();
     function getScore(){
         score = (score/arayToStoreQuestions.length)*100,
         console.log(score, "percent right :)")
+        araytoStoreScores.concat(score)
+        dispalyScore();
     }
 
     getIinitials();
     function getIinitials(){
-        
     }
 
-    dispalyScore();
     function dispalyScore(){
-        scorelist.textContent = araytoStoreScores
+        scorelist.textContent = araytoStoreScores[curentScore]
     }
 
 }
 
+function playagain(){
+    runQuiz();
+}
+
+reStart.addEventListener("click", playagain,);
 start.addEventListener("click", runQuiz,);
 
