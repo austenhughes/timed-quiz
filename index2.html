@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Quiz!!!</title>
+
+    <link rel="styleshet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div id="timer"> </div>
+
+    <div id="start"> <p> Quiz!!! </p>
+        <button id="startButton", type="button" class="btn btn-outline-secondary"> Start the quiz? </button>
+    </div>
+
+    <div id = "quiz">
+        
+        <div id ="question"> <p> Question: </p> </div>
+        <div id = "choices"> 
+            <button id="A", type="button" class="btn btn-outline-secondary">A</button>
+            <button id="B", type="button" class="btn btn-outline-secondary">B</button>
+            <button id="C", type="button" class="btn btn-outline-secondary">C</button>
+            <button id="D", type="button" class="btn btn-outline-secondary">D</button>
+        </div>
+        
+        <div id = "confirm" style= "display: none;"></div>
+    
+    </div>
+
+    <div id="scoreCard">
+
+        <div class="enter-intitals">
+            <p id=score > your score was : </p>
+
+            <textarea
+              id="initails"
+              placeholder="put your initials here: "
+            ></textarea>
+            
+            <div id="enterButton">
+                <button id="enter", type="button" class="btn btn-outline-secondary">enter</button>
+            </div>
+
+        <div> Past Scores: </div>
+        <ul id=list> </ul>
+        <button id="re-startButton", type="button" class="btn btn-outline-secondary"> Re-start the quiz? </button>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+<script src="script2.js"></script>
+   
+</body>
+
+</html>

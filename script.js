@@ -1,86 +1,121 @@
-var quiz= document.querySelector("#quiz");
-var confirm = document.querySelector("#confirm");
-var scoreCard = document.querySelector("#scoreCard");
-var start =document.querySelector("#start")
+var start =document.querySelector("#start");
+var timer =document.querySelector("#timer");
+var questions =document.querySelector("#questions");
+var answers = document.querySelector(".answers");
+var scoreCard =document.querySelector("#scoreCard");
+var quiz =document.querySelector("#quiz")
 
-var startQuizButton = document.querySelector("#startButton");
-var restartQuizButton = document.querySelector("#restartButton");
+var score = 0;
 
-var questionText = document.querySelector("#question");
-var choiceA = document.querySelector("#A");
-var choiceB = document.querySelector("#B");
-var choiceC = document.querySelector("#C");
-var choiceD = document.querySelector("#D");
+var arayToStoreQuestions=
+        [
+            {
+                question: "this is a question",
+                choices: ["A. thing","B. other thing","C. other other thing","D. last thing"],
+                correct: "B. other thing"
+            },
 
-var recordedRessults = []
+            {
+                question: "this is a question",
+                choices: ["A. thing","B. other thing","C. other other thing","D. last thing"],
+                correct: "B. other thing"
+            },
 
-var selected;
-var selectA;
-var selectB;
-var selectC;
-var selectD;
+            {
+                question: "this is a question",
+                choices: ["A. thing","B. other thing","C. other other thing","D. last thing"],
+                correct: "B. other thing"
+            },
+
+            {
+                question: "this is a question",
+                choices: ["A. thing","B. other thing","C. other other thing","D. last thing"],
+                correct: "B. other thing"
+            },
+
+            {
+                question: "this is a question",
+                choices: ["A. thing","B. other thing","C. other other thing","D. last thing"],
+                correct: "B. other thing"
+            },
+        ]
 
 
 function runQuiz() {
+    console.log("i am working"),
+    askquestion();
+};
 
-    // make start page hidden
-    // make scorecard page hidden
-    // make quiz apear 
-    var corectAnswers = 0;
-    var numberOfQuestion = 0;
-    var score;
-    var selected;
+var curentQuestion = 0
+
+function askquestion(){
+
+    var question = arayToStoreQuestions[curentQuestion].question;
+    var chosen = arayToStoreQuestions[curentQuestion].choices;
+
+    displayQuistion();
+    function displayQuistion(){
+
+        console.log(chosen);
     
-    var questions;
-    questions=
-        [
+        var questionsOnPage = document.createElement("div");
+        questionsOnPage.textContent = question,
+        questions.prepend(questionsOnPage);
 
-        (questionText.textContent = "Who is the first pokemon listed in the pokedex?",
-        choiceA.textContent = "Rhydon",
-        choiceB.textContent = "Bulbasaur",// corect answer
-        choiceC.textContent = "Pikachu",
-        choiceD.textContent = "Slowbro")
+        arayToStoreQuestions[curentQuestion].choices.forEach(function(chosen){
+        var answersOnPage = document.createElement("div");
+        answersOnPage.textContent = chosen,
+        answersOnPage.addEventListener("click", clickFunction);
+        answers.append(answersOnPage);   
+        });
 
-        ]
-
-        for(var i=0; i < arayToStoreQuestions.length; i++)
-
-            if(selected = selectB){
-                console.log(selected)
-                numberOfQuestion= ((numberOfQuestion) +1);
-                corectAnswers = ((corectAnswers)+1);
-                console.log("question 1 corect.")
-                console.log(numberOfQuestion)
-                // dispaly corect :) for short set amount of time
-            }else{
-                console.log(selected)
-                numberOfQuestion= ((numberOfQuestion)+1);
-                // display incorect for short set amount of time
-                console.log("question 1 incorect.")
-                console.log(numberOfQuestion)
-            }
-
-    getScore();
-        
-    function getScore(){
-    score=corectAnswers/numberOfQuestion;
-    console.log("this round score is ", score);
-    recordedRessults = recordedRessults.concat(score);
-    console.log("these are the recorded results", recordedRessults)
+        // clearlast();
+        // function clearlast(){
+        // answersOnPage.textContent= "";
+        // questionsOnPage.textContent= "";
+        // displayQuistion();
+        // }
     }
-
-//     make quiz page hidden
-//     make core card page apear
-//     dispaly recorededResults as a list 
-//     button to try again 
-//     run function runQuiz
-// 
 
 }
 
-choiceA.addEventListener("click", selected = selectA);
-choiceB.addEventListener("click", selected = selectB);
-choiceC.addEventListener("click", selected = selectC);
-choiceD.addEventListener("click", selected = selectD);
+
+function clickFunction(){   
+    curentQuestion ++
+    if(curentQuestion < arayToStoreQuestions.length && this.textContent === arayToStoreQuestions[curentQuestion].correct){
+        console.log("right");
+        console.log(this.textContent);
+        score =score + 1;
+        console.log(score);  
+        askquestion();
+    }else if (curentQuestion === arayToStoreQuestions.length && this.textContent === arayToStoreQuestions[curentQuestion].correct){
+        console.log("right ... game over");
+        console.log(this.textContent);
+        score = score+ 1;
+        console.log(score);
+        enterScore ();  
+    }else if (curentQuestion < arayToStoreQuestions.length && this.textContent !== arayToStoreQuestions[curentQuestion].correct){
+        console.log("wrong");
+        console.log(this.textContent);
+        console.log(score);
+        askquestion ();
+    }else if (curentQuestion === arayToStoreQuestions.length && this.textContent !== arayToStoreQuestions[curentQuestion].correct){
+        console.log("wrong ... game over");
+        console.log(this.textContent);
+        console.log(score);
+        enterScore ();
+    }
+}
+
+function enterScore(){
+
+    getScore();
+    function getScore(){
+        score = score/arayToStoreQuestions.length,
+        console.log(score,+ "%")
+    }
+
+}
 
 start.addEventListener("click", runQuiz,);
+
