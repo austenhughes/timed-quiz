@@ -3,10 +3,12 @@ var timer =document.querySelector("#timer");
 var questions =document.querySelector("#questions");
 var answers = document.querySelector(".answers");
 var scoreCard =document.querySelector("#scoreCard");
-var quiz =document.querySelector("#quiz")
+var quiz =document.querySelector("#quiz");
+var scorelist=document.querySelector("scoreList");
 
 var score = 0;
 
+var araytoStoreScores=[];
 var arayToStoreQuestions=
         [
             {
@@ -41,8 +43,29 @@ var arayToStoreQuestions=
         ]
 
 
+var runTimer = document.querySelector("#timer"); 
+var secondsLeft = 20
+    
+    
+function setTime(){
+    var timerInterval = setInterval(function() {
+        runTimer.textContent = secondsLeft + " seconds left";
+        secondsLeft--;
+        
+    if(secondsLeft <= 0) {
+        clearInterval(timerInterval);
+        runTimer.textContent= ("game over")
+        enterScore();
+    }
+        
+    }, 
+    2000);
+    }  
+
 function runQuiz() {
+
     console.log("i am working"),
+    setTime();
     askquestion();
 };
 
@@ -50,59 +73,68 @@ var curentQuestion = 0
 
 function askquestion(){
 
+    clearQuestion();
+    function clearQuestion(){
+
+    }
+
     var question = arayToStoreQuestions[curentQuestion].question;
     var chosen = arayToStoreQuestions[curentQuestion].choices;
 
     displayQuistion();
-    function displayQuistion(){
+    function displayQuistion(){ // needs to clear between questions 
 
-        console.log(chosen);
-    
         var questionsOnPage = document.createElement("div");
         questionsOnPage.textContent = question,
-        questions.prepend(questionsOnPage);
+        answers.append(questionsOnPage);
 
         arayToStoreQuestions[curentQuestion].choices.forEach(function(chosen){
         var answersOnPage = document.createElement("div");
         answersOnPage.textContent = chosen,
         answersOnPage.addEventListener("click", clickFunction);
         answers.append(answersOnPage);   
-        });
-
-        // clearlast();
-        // function clearlast(){
-        // answersOnPage.textContent= "";
-        // questionsOnPage.textContent= "";
-        // displayQuistion();
-        // }
+        });    
+    
     }
 
 }
 
 
-function clickFunction(){   
+function clickFunction(){  
+
     curentQuestion ++
+    console.log(curentQuestion)
+    console.log(arayToStoreQuestions[curentQuestion].correct);
+
     if(curentQuestion < arayToStoreQuestions.length && this.textContent === arayToStoreQuestions[curentQuestion].correct){
         console.log("right");
         console.log(this.textContent);
         score =score + 1;
-        console.log(score);  
+        console.log(score); 
         askquestion();
-    }else if (curentQuestion === arayToStoreQuestions.length && this.textContent === arayToStoreQuestions[curentQuestion].correct){
+
+// this is broken    
+    }else if(curentQuestion === arayToStoreQuestions.length && this.textContent === arayToStoreQuestions[curentQuestion].correct){
         console.log("right ... game over");
         console.log(this.textContent);
         score = score+ 1;
         console.log(score);
+        secondsLeft =0;
         enterScore ();  
-    }else if (curentQuestion < arayToStoreQuestions.length && this.textContent !== arayToStoreQuestions[curentQuestion].correct){
+
+    }else if(curentQuestion < arayToStoreQuestions.length && this.textContent !== arayToStoreQuestions[curentQuestion].correct){
         console.log("wrong");
         console.log(this.textContent);
         console.log(score);
+        secondsLeft = secondsLeft - 5;
         askquestion ();
-    }else if (curentQuestion === arayToStoreQuestions.length && this.textContent !== arayToStoreQuestions[curentQuestion].correct){
+    
+//this is broken 
+    }else if(curentQuestion === arayToStoreQuestions.length && this.textContent !== arayToStoreQuestions[curentQuestion].correct){
         console.log("wrong ... game over");
         console.log(this.textContent);
         console.log(score);
+        secondsLeft = 0;
         enterScore ();
     }
 }
@@ -111,8 +143,18 @@ function enterScore(){
 
     getScore();
     function getScore(){
-        score = score/arayToStoreQuestions.length,
-        console.log(score,+ "%")
+        score = (score/arayToStoreQuestions.length)*100,
+        console.log(score, "percent right :)")
+    }
+
+    getIinitials();
+    function getIinitials(){
+        
+    }
+
+    dispalyScore();
+    function dispalyScore(){
+        scorelist.textContent = araytoStoreScores
     }
 
 }
