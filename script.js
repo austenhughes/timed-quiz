@@ -4,8 +4,15 @@ var timer =document.querySelector("#timer");
 var questions =document.querySelector("#questions");
 var answers = document.querySelector(".answers");
 var scoreCard =document.querySelector("#scoreCard");
+var scorelist =document.querySelector("#scoreList");
 var quiz =document.querySelector("#quiz");
-var scorelist=document.querySelector("scoreList");
+var scoreCard=document.querySelector("#scoreCard");
+var getInitials=document.querySelector("#initialBox")
+var enterInitials=document.querySelector("#enter-intitals")
+
+
+scoreCard.style.visibility = "hidden";
+reStart.style.visibility = "hidden";
 
 var score = 0;
 var curentScore=0;
@@ -64,14 +71,16 @@ function setTime(){
     2000);
     }  
 
+var curentQuestion = 0
+
 function runQuiz() {
+
+    start.style.visibility = "hidden";
 
     console.log("i am working"),
     setTime();
     askquestion();
 };
-
-var curentQuestion = 0
 
 function askquestion(){
 
@@ -81,7 +90,7 @@ function askquestion(){
     var chosen = arayToStoreQuestions[curentQuestion].choices;
 
     displayQuistion();
-    function displayQuistion(){ // needs to clear between questions 
+    function displayQuistion(){ 
 
         var questionsOnPage = document.createElement("div");
         questionsOnPage.textContent = question,
@@ -108,38 +117,36 @@ function clickFunction(){
 
     curentQuestion ++
     console.log(curentQuestion)
-    console.log(arayToStoreQuestions[curentQuestion].correct);
 
-    if(curentQuestion < arayToStoreQuestions.length && this.textContent === arayToStoreQuestions[curentQuestion].correct){
+    if(curentQuestion < arayToStoreQuestions.length && this.textContent == this.correct){
         console.log("right");
         console.log(this.textContent);
         score =score + 1;
         console.log(score); 
         askquestion();
-
-// this is broken    
-    }else if(curentQuestion === arayToStoreQuestions.length && this.textContent === arayToStoreQuestions[curentQuestion].correct){
+  
+    }else if(curentQuestion == arayToStoreQuestions.length && this.textContent == this.correct) {
         console.log("right ... game over");
         console.log(this.textContent);
+        console.log(this.correct);
         score = score+ 1;
         console.log(score);
-        secondsLeft =0;
-        enterScore ();  
+        secondsLeft = 0;
+        enterScore(); 
 
-    }else if(curentQuestion < arayToStoreQuestions.length && this.textContent !== arayToStoreQuestions[curentQuestion].correct){
+    } else if(curentQuestion < arayToStoreQuestions.length && this.textContent !== this.correct){
         console.log("wrong");
         console.log(this.textContent);
         console.log(score);
         secondsLeft = secondsLeft - 5;
         askquestion ();
     
-//this is broken 
-    }else if(curentQuestion === arayToStoreQuestions.length && this.textContent !== arayToStoreQuestions[curentQuestion].correct){
+    }else if(curentQuestion == arayToStoreQuestions.length && this.textContent !== this.correct){
         console.log("wrong ... game over");
         console.log(this.textContent);
         console.log(score);
         secondsLeft = 0;
-        getScore();
+        enterScore();
     }
 }
 
@@ -149,24 +156,36 @@ function enterScore(){
 
     getScore();
     function getScore(){
-        score = (score/arayToStoreQuestions.length)*100,
-        console.log(score, "percent right :)")
-        araytoStoreScores.concat(score)
+        console.log(score , " out of ", arayToStoreQuestions.length);
+        
         dispalyScore();
-    }
+        function dispalyScore(){
+            reStart.style.visibility = "visible";
+            scoreCard.style.visibility = "visible";
+            getInitials.style.visibility = "visible";
+            enterInitials.style.visibility = "visible";
+        }
 
-    getIinitials();
-    function getIinitials(){
-    }
+        function addInitials(){
+            var textarea = document.querySelector("#initialBox").value;
+            var getInitials = document.createElement("div");
+            getInitials.textContent = textarea,
+            scorelist.append(textarea, " : ", score , " out of ", arayToStoreQuestions.length);
+            getInitials.style.visibility = "hidden";
+            enterInitials.style.visibility = "hidden";
+        }
 
-    function dispalyScore(){
-        scorelist.textContent = araytoStoreScores[curentScore]
+        enterInitials.addEventListener("click", addInitials,);
+
     }
 
 }
 
 function playagain(){
     runQuiz();
+    curentQuestion = 0
+    score = 0
+    secondsLeft = 20
 }
 
 reStart.addEventListener("click", playagain,);
