@@ -8,6 +8,7 @@ var scorelist =document.querySelector("#scoreList");
 var quiz =document.querySelector("#quiz");
 var getInitials=document.querySelector("#initialBox");
 var enterInitials=document.querySelector("#enter-intitals");
+var displayscore=document.querySelector("#displayScore")
 
 
 scoreCard.style.visibility = "hidden";
@@ -91,7 +92,6 @@ function askquestion(){
 
         if (curentQuestion == arayToStoreQuestions.length){
             secondsLeft = 0
-            enterScore
         }else{
         
         var question = arayToStoreQuestions[curentQuestion].question;
@@ -144,16 +144,24 @@ function clickFunction(){
 
 }
 
+var nextScore = 0;
+
 function enterScore(){
 
     clearQuestion();
 
     getScore();
     function getScore(){
+
         console.log(score , " out of ", arayToStoreQuestions.length);
+        
+        console.log(nextScore)
         
         dispalyScore();
         function dispalyScore(){
+            // scorelist.innerHTML = "";
+            displayscore.style.visibility = "visible";
+            displayscore.textContent = ("you got " + score + " out of " + arayToStoreQuestions.length + " : enter your intitals to add your score")
             reStart.style.visibility = "visible";
             scoreCard.style.visibility = "visible";
             getInitials.style.visibility = "visible";
@@ -162,13 +170,17 @@ function enterScore(){
 
         function addInitials(){
             var textarea = document.querySelector("#initialBox").value;
-            var getInitials = document.createElement("div");
             getInitials.textContent = textarea,
-            scorelist.append(textarea, " : ", score , " out of ", arayToStoreQuestions.length);
+            araytoStoreScores.push(textarea + " : " + score + " out of " + arayToStoreQuestions.length + "  ");
+            scorelist.append(araytoStoreScores[nextScore]);
+            console.log(araytoStoreScores[nextScore])
+            nextScore ++
+            console.log(nextScore)
             hidebox();
         }
 
         function hidebox(){
+        displayscore.style.visibility = "hidden";
         getInitials.style.visibility = "hidden";
         enterInitials.style.visibility = "hidden";
         }
