@@ -6,9 +6,8 @@ var answers = document.querySelector(".answers");
 var scoreCard =document.querySelector("#scoreCard");
 var scorelist =document.querySelector("#scoreList");
 var quiz =document.querySelector("#quiz");
-var scoreCard=document.querySelector("#scoreCard");
-var getInitials=document.querySelector("#initialBox")
-var enterInitials=document.querySelector("#enter-intitals")
+var getInitials=document.querySelector("#initialBox");
+var enterInitials=document.querySelector("#enter-intitals");
 
 
 scoreCard.style.visibility = "hidden";
@@ -21,33 +20,33 @@ var araytoStoreScores=[];
 var arayToStoreQuestions=
         [
             {
-                question: "this is a question",
-                choices: ["A. thing","B. other thing","C. other other thing","D. last thing"],
-                correct: "B. other thing"
+                question: "what is the corect place to insert the javascript?",
+                choices: ["A. the <head> ","B. the <body> ","C. the <script> ","D. anywhere"],
+                correct: "C. the <script> "
             },
 
             {
-                question: "this is a question",
-                choices: ["A. thing","B. other thing","C. other other thing","D. last thing"],
-                correct: "B. other thing"
+                question: "who invented javascript?",
+                choices: ["A. the internet","B. a monkey ","C. Bendan Eich ","D. A guy named Vlad"],
+                correct: "C. Bendan Eich "
             },
 
             {
-                question: "this is a question",
-                choices: ["A. thing","B. other thing","C. other other thing","D. last thing"],
-                correct: "B. other thing"
+                question: "when was javascript created?",
+                choices: ["A. 2045","B. 1810","C. 1995 ","D. 1980"],
+                correct: "C. 1995 "
             },
 
             {
-                question: "this is a question",
-                choices: ["A. thing","B. other thing","C. other other thing","D. last thing"],
-                correct: "B. other thing"
+                question: "how do you set a varible with javascript",
+                choices: ["A. var ","B. you cant ","C. everything is a vairble ","D. you ask it nicely"],
+                correct: "A. var "
             },
 
             {
-                question: "this is a question",
-                choices: ["A. thing","B. other thing","C. other other thing","D. last thing"],
-                correct: "B. other thing"
+                question: "where do you link your script page?",
+                choices: ["A. on the javascript page ","B. on your style sheet ","C. in your html ","D. you dont need to "],
+                correct: "C. in your html "
             },
         ]
 
@@ -86,12 +85,17 @@ function askquestion(){
 
     clearQuestion();
 
-    var question = arayToStoreQuestions[curentQuestion].question;
-    var chosen = arayToStoreQuestions[curentQuestion].choices;
 
     displayQuistion();
     function displayQuistion(){ 
 
+        if (curentQuestion == arayToStoreQuestions.length){
+            secondsLeft = 0
+            enterScore
+        }else{
+        
+        var question = arayToStoreQuestions[curentQuestion].question;
+        console.log(question)
         var questionsOnPage = document.createElement("div");
         questionsOnPage.textContent = question,
         answers.append(questionsOnPage);
@@ -101,7 +105,9 @@ function askquestion(){
         answersOnPage.textContent = chosen,
         answersOnPage.addEventListener("click", clickFunction);
         answers.append(answersOnPage);   
-        });    
+        });  
+        
+    }
     
     }
 
@@ -115,39 +121,27 @@ function clearQuestion(){
 
 function clickFunction(){  
 
-    curentQuestion ++
     console.log(curentQuestion)
+    var corectAnswer = (arayToStoreQuestions[curentQuestion]).correct;
+    console.log(corectAnswer);
 
-    if(curentQuestion < arayToStoreQuestions.length && this.textContent == this.correct){
+    if(this.textContent == corectAnswer){
         console.log("right");
         console.log(this.textContent);
         score =score + 1;
-        console.log(score); 
-        askquestion();
-  
-    }else if(curentQuestion == arayToStoreQuestions.length && this.textContent == this.correct) {
-        console.log("right ... game over");
-        console.log(this.textContent);
-        console.log(this.correct);
-        score = score+ 1;
         console.log(score);
-        secondsLeft = 0;
-        enterScore(); 
+        curentQuestion ++ 
+        askquestion();
 
-    } else if(curentQuestion < arayToStoreQuestions.length && this.textContent !== this.correct){
+    } else if(this.textContent !== corectAnswer) {
         console.log("wrong");
         console.log(this.textContent);
         console.log(score);
         secondsLeft = secondsLeft - 5;
+        curentQuestion ++
         askquestion ();
-    
-    }else if(curentQuestion == arayToStoreQuestions.length && this.textContent !== this.correct){
-        console.log("wrong ... game over");
-        console.log(this.textContent);
-        console.log(score);
-        secondsLeft = 0;
-        enterScore();
     }
+
 }
 
 function enterScore(){
@@ -171,9 +165,14 @@ function enterScore(){
             var getInitials = document.createElement("div");
             getInitials.textContent = textarea,
             scorelist.append(textarea, " : ", score , " out of ", arayToStoreQuestions.length);
-            getInitials.style.visibility = "hidden";
-            enterInitials.style.visibility = "hidden";
+            hidebox();
         }
+
+        function hidebox(){
+        getInitials.style.visibility = "hidden";
+        enterInitials.style.visibility = "hidden";
+        }
+    
 
         enterInitials.addEventListener("click", addInitials,);
 
@@ -182,10 +181,14 @@ function enterScore(){
 }
 
 function playagain(){
-    runQuiz();
+    secondsLeft = 20
+    getInitials.value="";
     curentQuestion = 0
     score = 0
-    secondsLeft = 20
+    scoreCard.style.visibility = "hidden";
+    reStart.style.visibility = "hidden";
+    getInitials.style.visibility = "hidden";
+    runQuiz();
 }
 
 reStart.addEventListener("click", playagain,);

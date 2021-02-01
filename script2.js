@@ -117,13 +117,13 @@ function clickFunction(){
         console.log(score); 
         askquestion();
   
-    // }else if(curentQuestion == arayToStoreQuestions.length && this.textContent == araytoStoreScores[curentScore].correct) {
-    //     console.log("right ... game over");
-    //     console.log(this.textContent);
-    //     score = score+ 1;
-    //     console.log(score);
-    //     secondsLeft = 0;
-    //     enterScore(); 
+    }else if(curentQuestion == arayToStoreQuestions.length && this.textContent == araytoStoreScores[curentScore].correct) {
+        console.log("right ... game over");
+        console.log(this.textContent);
+        score = score+ 1;
+        console.log(score);
+        secondsLeft = 0;
+        enterScore(); 
 
     } else if(curentQuestion < arayToStoreQuestions.length && this.textContent !== araytoStoreScores[curentScore].correct){
         console.log("wrong");
@@ -132,12 +132,12 @@ function clickFunction(){
         secondsLeft = secondsLeft - 5;
         askquestion ();
     
-    // }else if(curentQuestion == arayToStoreQuestions.length && this.textContent !== araytoStoreScores[curentScore].correct){
-    //     console.log("wrong ... game over");
-    //     console.log(this.textContent);
-    //     console.log(score);
-    //     secondsLeft = 0;
-    //     enterScore();
+    }else if(curentQuestion == arayToStoreQuestions.length && this.textContent !== araytoStoreScores[curentScore].correct){
+        console.log("wrong ... game over");
+        console.log(this.textContent);
+        console.log(score);
+        secondsLeft = 0;
+        enterScore();
     }
 }
 
