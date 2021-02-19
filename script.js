@@ -14,10 +14,10 @@ var displayscore=document.querySelector("#displayScore")
 scoreCard.style.visibility = "hidden";
 reStart.style.visibility = "hidden";
 
+var curentQuestion = 0;
 var score = 0;
 var curentScore=0;
 
-var araytoStoreScores=[];
 var arayToStoreQuestions=
         [
             {
@@ -51,7 +51,6 @@ var arayToStoreQuestions=
             },
         ]
 
-
 var runTimer = document.querySelector("#timer"); 
 var secondsLeft = 20
     
@@ -64,14 +63,14 @@ function setTime(){
     if(secondsLeft <= 0) {
         clearInterval(timerInterval);
         runTimer.textContent= ("game over")
-        enterScore();
+        getScore();
     }
         
     }, 
     2000);
     }  
 
-var curentQuestion = 0
+// var curentQuestion = 0
 
 function runQuiz() {
 
@@ -85,7 +84,6 @@ function runQuiz() {
 function askquestion(){
 
     clearQuestion();
-
 
     displayQuistion();
     function displayQuistion(){ 
@@ -144,22 +142,13 @@ function clickFunction(){
 
 }
 
-var nextScore = 0;
-
-function enterScore(){
-
-    clearQuestion();
-
-    getScore();
     function getScore(){
 
         console.log(score , " out of ", arayToStoreQuestions.length);
-        
-        console.log(nextScore)
+        clearQuestion();
         
         dispalyScore();
         function dispalyScore(){
-            // scorelist.innerHTML = "";
             displayscore.style.visibility = "visible";
             displayscore.textContent = ("you got " + score + " out of " + arayToStoreQuestions.length + " : enter your intitals to add your score")
             reStart.style.visibility = "visible";
@@ -170,12 +159,13 @@ function enterScore(){
 
         function addInitials(){
             var textarea = document.querySelector("#initialBox").value;
-            getInitials.textContent = textarea,
-            araytoStoreScores.push(textarea + " : " + score + " out of " + arayToStoreQuestions.length + "  ");
-            scorelist.append(araytoStoreScores[nextScore]);
-            console.log(araytoStoreScores[nextScore])
-            nextScore ++
-            console.log(nextScore)
+            console.log(textarea)
+
+            var initialsOnPage = document.createElement("div");
+            initialsOnPage.textContent = (textarea + " : " + score);
+            scorelist.append(initialsOnPage);
+            console.log(initialsOnPage)
+
             hidebox();
         }
 
@@ -185,13 +175,11 @@ function enterScore(){
         enterInitials.style.visibility = "hidden";
         }
     
-
         enterInitials.addEventListener("click", addInitials,);
 
     }
 
-}
-
+    
 function playagain(){
     secondsLeft = 20
     getInitials.value="";
@@ -200,9 +188,12 @@ function playagain(){
     scoreCard.style.visibility = "hidden";
     reStart.style.visibility = "hidden";
     getInitials.style.visibility = "hidden";
+    displayscore.style.visibility = "hidden";
+    enterInitials.style.visibility = "hidden";
     runQuiz();
 }
 
 reStart.addEventListener("click", playagain,);
 start.addEventListener("click", runQuiz,);
+
 
