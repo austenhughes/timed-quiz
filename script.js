@@ -10,7 +10,6 @@ var getInitials=document.querySelector("#initialBox");
 var enterInitials=document.querySelector("#enter-intitals");
 var displayscore=document.querySelector("#displayScore")
 
-
 scoreCard.style.visibility = "hidden";
 reStart.style.visibility = "hidden";
 
@@ -70,8 +69,6 @@ function setTime(){
     2000);
     }  
 
-// var curentQuestion = 0
-
 function runQuiz() {
 
     start.style.visibility = "hidden";
@@ -79,7 +76,7 @@ function runQuiz() {
     console.log("i am working"),
     setTime();
     askquestion();
-};
+}
 
 function askquestion(){
 
@@ -111,11 +108,9 @@ function askquestion(){
 
 }
 
-clearQuestion();
 function clearQuestion(){
     answers.innerHTML="";
 }
-
 
 function clickFunction(){  
 
@@ -142,44 +137,39 @@ function clickFunction(){
 
 }
 
-    function getScore(){
+function getScore(){
 
-        console.log(score , " out of ", arayToStoreQuestions.length);
-        clearQuestion();
-        
-        dispalyScore();
-        function dispalyScore(){
-            displayscore.style.visibility = "visible";
-            displayscore.textContent = ("you got " + score + " out of " + arayToStoreQuestions.length + " : enter your intitals to add your score")
-            reStart.style.visibility = "visible";
-            scoreCard.style.visibility = "visible";
-            getInitials.style.visibility = "visible";
-            enterInitials.style.visibility = "visible";
-        }
+    console.log(score , " out of ", arayToStoreQuestions.length);
+    clearQuestion();
+    dispalyScore();
+}
 
-        function addInitials(){
-            var textarea = document.querySelector("#initialBox").value;
-            console.log(textarea)
+function dispalyScore(){
+    displayscore.style.visibility = "visible";
+    displayscore.textContent = ("you got " + score + " out of " + arayToStoreQuestions.length + " : enter your intitals to add your score")
+    reStart.style.visibility = "visible";
+    scoreCard.style.visibility = "visible";
+    getInitials.style.visibility = "visible";
+    enterInitials.style.visibility = "visible";
+}
 
-            var initialsOnPage = document.createElement("div");
-            initialsOnPage.textContent = (textarea + " : " + score);
-            scorelist.append(initialsOnPage);
-            console.log(initialsOnPage)
+function addInitials(){
+    var textarea = document.querySelector("#initialBox").value;
+    console.log(textarea)
 
-            hidebox();
-        }
+    var initialsOnPage = document.createElement("div");
+    initialsOnPage.textContent = (textarea + " : " + score);
+    scorelist.append(initialsOnPage);
+    console.log(initialsOnPage);
+    hidebox();
+}
 
-        function hidebox(){
-        displayscore.style.visibility = "hidden";
-        getInitials.style.visibility = "hidden";
-        enterInitials.style.visibility = "hidden";
-        }
-    
-        enterInitials.addEventListener("click", addInitials,);
-
-    }
-
-    
+function hidebox(){
+    displayscore.style.visibility = "hidden";
+    getInitials.style.visibility = "hidden";
+    enterInitials.style.visibility = "hidden";
+}
+   
 function playagain(){
     secondsLeft = 20
     getInitials.value="";
@@ -195,5 +185,6 @@ function playagain(){
 
 reStart.addEventListener("click", playagain,);
 start.addEventListener("click", runQuiz,);
+enterInitials.addEventListener("click", addInitials,);
 
 
