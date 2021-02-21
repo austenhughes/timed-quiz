@@ -7,30 +7,22 @@
 
 #start {
     text-align: center;
-    margin-left: 150px;
-    margin-right: 150px;
 }
 
 #quiz {
     text-align: center;
-    margin-left: 150px;
-    margin-right: 150px;
 }
 
 #scoreCard {
     text-align: center;
     padding: 5px;
     margin: 10px;
-    margin-left: 150px;
-    margin-right: 150px;
 }
 
 #reStart {
     text-align: center;
     padding:5px;
     margin:10px;
-    margin-left: 150px;
-    margin-right: 150px;
 }
 
 .btn{

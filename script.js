@@ -73,7 +73,6 @@ function runQuiz() {
 
     start.style.visibility = "hidden";
 
-    console.log("i am working"),
     setTime();
     askquestion();
 }
@@ -90,7 +89,6 @@ function askquestion(){
         }else{
         
         var question = arayToStoreQuestions[curentQuestion].question;
-        console.log(question)
         var questionsOnPage = document.createElement("div");
         questionsOnPage.textContent = question,
         answers.append(questionsOnPage);
@@ -114,22 +112,14 @@ function clearQuestion(){
 
 function clickFunction(){  
 
-    console.log(curentQuestion)
     var corectAnswer = (arayToStoreQuestions[curentQuestion]).correct;
-    console.log(corectAnswer);
 
     if(this.textContent == corectAnswer){
-        console.log("right");
-        console.log(this.textContent);
         score =score + 1;
-        console.log(score);
         curentQuestion ++ 
         askquestion();
 
     } else if(this.textContent !== corectAnswer) {
-        console.log("wrong");
-        console.log(this.textContent);
-        console.log(score);
         secondsLeft = secondsLeft - 5;
         curentQuestion ++
         askquestion ();
@@ -139,7 +129,6 @@ function clickFunction(){
 
 function getScore(){
 
-    console.log(score , " out of ", arayToStoreQuestions.length);
     clearQuestion();
     dispalyScore();
 }
@@ -155,12 +144,9 @@ function dispalyScore(){
 
 function addInitials(){
     var textarea = document.querySelector("#initialBox").value;
-    console.log(textarea)
-
     var initialsOnPage = document.createElement("div");
     initialsOnPage.textContent = (textarea + " : " + score);
     scorelist.append(initialsOnPage);
-    console.log(initialsOnPage);
     hidebox();
 }
 
